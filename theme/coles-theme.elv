@@ -1,5 +1,6 @@
+# Cole's theme
 #
-# Powerline prompt theme
+# Based off of Powerline prompt theme
 #     Copyright (c) 2017-2018, Christian Muehlhaeuser <muesli@gmail.com>
 #
 # Based on chain.elv by Diego Zamboni <diego@zzamboni.org>
@@ -38,7 +39,6 @@ use github.com/muesli/elvish-libs/git
 
 # Configurable prompt segments for each prompt
 prompt-segments = [
-	host
 	dir
 	virtualenv
 	git-branch
@@ -50,9 +50,9 @@ prompt-segments = [
 	newline
 	timestamp
 	user
-	arrow
 ]
-rprompt-segments = [ ]
+rprompt-segments = [
+]
 
 # Glyphs to be used in the prompt
 glyph = [
@@ -143,6 +143,10 @@ fn -prompt-builder {
 	fn -colorprint [what fg bg]{
 		edit:styled $what "38;5;"$fg";48;5;"$bg
 		last-bg = $bg
+	}
+
+	fn -colorprint-default [what fg]{
+		edit:styled $what "38;5;"$fg";49"
 	}
 
 	# Build a prompt segment in the given style, surrounded by square brackets
@@ -296,7 +300,7 @@ fn -prompt-builder {
 					if (not (eq $seg "newline")) {
 						-colorprint $glyph[chain] $lbg $last-bg
 					} else {
-						-colorprint $glyph[chain] $lbg "0"
+						-colorprint-default $glyph[chain] $lbg
 					}
 				}
 				put $@output
@@ -307,8 +311,8 @@ fn -prompt-builder {
 				}
 			}
 		}
-		-colorprint $glyph[chain]" " $last-bg "0"
-	}
+		-colorprint-default $glyph[chain]" " $last-bg
+}
 
 	put $-build-chain~
 }
