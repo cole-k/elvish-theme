@@ -1,5 +1,5 @@
 # elvish-libs
-Libs & Themes for [elvish](https://github.com/elves/elvish)
+Libs & Themes for [elvish](https://github.com/elves/elvish) forked from [muesli](https://github.com/muesli).
 
 ## Install
 
